@@ -22,11 +22,32 @@ const Card = ({ classname, product, isGrid }) => {
           alt={product.name}
         />
       </div>
-      <div className="flex flex-col gap-2 justify-center bg-white items-center">
+      <div className="flex flex-col gap-2 justify-center py-5 bg-white items-center">
         <p>{product.name}</p>
-        {[...new Array(product.ratingValue)].map((value) => {
-          return <StarIcon key={value} className="bg-yellow-400" />;
-        })}
+        <div className="flex gap-2">
+          {[...new Array(5)].map((value, idx) => {
+            if (idx < product.ratingValue) {
+              return (
+                <Image
+                  key={idx}
+                  src="/yellow-star.png"
+                  width={20}
+                  height={20}
+                  alt="star"
+                />
+              );
+            } else
+              return (
+                <Image
+                  key={idx}
+                  src="/star.png"
+                  width={20}
+                  height={20}
+                  alt="star"
+                />
+              );
+          })}
+        </div>
         <div className="flex justify-center items-center gap-2">
           <p className="font-bold text-blue-400">${product.discountPrice}</p>
           <p className="text-gray-400 line-through">${product.price}</p>
