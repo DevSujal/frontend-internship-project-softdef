@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Header = () => {
+const Header = ({className}) => {
   const path = usePathname();
 
   const links = [
@@ -16,7 +16,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex justify-between items-center p-4 bg-white relative">
+    <header className={`flex justify-between items-center p-4 bg-white  ${className}`}>
       <div className="flex items-center gap-2">
         <Image src="/logo.png" alt="logo" width={30} height={30} />
         <strong>E-COMM</strong>
@@ -46,7 +46,7 @@ const Header = () => {
           <Menu />
         </label>
 
-        <div className="peer-checked:flex hidden flex-col gap-2 p-4 bg-white rounded shadow absolute right-0 top-10 w-48 z-40 transition-all duration-300">
+        <div className="peer-checked:flex hidden flex-col gap-2 bg-white rounded shadow absolute right-0 top-10 w-48 z-40 transition-all duration-300">
           {links.map((link) => (
             <Link
               key={link.id}
@@ -55,7 +55,7 @@ const Header = () => {
                 path === link.path
                   ? "bg-blue-500 text-white"
                   : "text-black hover:bg-gray-100"
-              } rounded-sm p-2 text-center transition`}
+              } rounded-sm text-center transition`}
             >
               {link.name.toUpperCase()}
             </Link>
