@@ -7,8 +7,12 @@ import { Grid, Menu } from "lucide-react";
 import { items } from "../data/mockData";
 import Card from "@/components/Card";
 import Footer from "@/components/Footer";
+import { Provider, useSelector } from "react-redux";
+import { store } from "@/store/searchReducer";
 
 export default function Home() {
+  const filterObj = useSelector((state) => state.searchReducer);
+  console.log(filterObj);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
@@ -72,9 +76,21 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-3 gap-2">
-            {currentItems.map((item) => (
-              <Card key={item.id} product={item} />
-            ))}
+            {currentItems
+              .filter(
+                (item) =>
+                  item.discountPrice >= filterObj.minPrice &&
+                  item.discountPrice <= filterObj.maxPrice
+              )
+              .filter((item) =>
+                item.colors.some(
+                  (color) =>
+                    color.toLowerCase() == filterObj.color.toLowerCase()
+                )
+              )
+              .map((item) => (
+                <Card key={item.id} product={item} />
+              ))}
           </div>
 
           <div className="bg-[#F6F7F8] flex h-16 justify-center gap-2 mt-4">

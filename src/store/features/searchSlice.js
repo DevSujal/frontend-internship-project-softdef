@@ -14,10 +14,10 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setMinPrice(state, action) {
-      state.minPrice = action.payload.minPrice;
+      state.minPrice = action.payload.value;
     },
     setMaxPrice(state, action) {
-      state.maxPrice = action.payload.maxPrice;
+      state.maxPrice = action.payload.value;
     },
     setColor(state, action) {
       state.color = action.payload.color;

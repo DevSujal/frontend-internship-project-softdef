@@ -3,8 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import "./sidebar.css";
 import { Menu, X } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setColor } from "@/store/features/searchSlice";
 
 const Sidebar = ({ className }) => {
+  const dispatch = useDispatch();
   const deals = [
     { id: 1, name: "Nike", value: 2 },
     { id: 2, name: "Airmax", value: 48 },
@@ -111,8 +114,19 @@ const Sidebar = ({ className }) => {
   };
 
   const handleColorClick = (e) => {
+    console.log("Hi");
     if (e.target.tagName === "SPAN") {
       setCurrColor(Number(e.target.id));
+      console.log(e.target.id);
+      console.log(
+        colors.filter((color) => color.id === Number(e.target.id))[0]
+      );
+      dispatch(
+        setColor({
+          color: colors.filter((color) => color.id === Number(e.target.id))[0]
+            .name,
+        })
+      );
     }
   };
 
